@@ -38,6 +38,26 @@ const rings = Array.from({ length: 24 }, (_, i) => {
     y: terrainHeight(x, z) + clearance + r,
   };
 });
+const state = {
+  x: 0,
+  y: 80,
+  z: 0,
+  speed: 42,
+  throttle: 0.55,
+  pitch: 0,
+  roll: 0,
+  heading: 0,
+  time: 0,
+};
+
+const keys = new Set();
+
+const rings = Array.from({ length: 24 }, (_, i) => ({
+  x: Math.sin(i * 1.15) * 120,
+  y: 25 + (i % 4) * 12,
+  z: 240 + i * 220,
+  r: 18 + (i % 3) * 4,
+}));
 
 window.addEventListener('keydown', (event) => {
   if (event.code === 'Space') {
@@ -56,6 +76,10 @@ function reset() {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function terrainHeight(x, z) {
+  return 18 + Math.sin(x * 0.03) * 9 + Math.cos(z * 0.02) * 8 + Math.sin((x + z) * 0.01) * 5;
 }
 
 function projectPoint(px, py, pz) {
