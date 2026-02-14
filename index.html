@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Flight Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="sim-card">
+        <h1>Simple Flight Simulator</h1>
+        <canvas id="simCanvas" width="960" height="540" aria-label="Flight simulation view"></canvas>
+        <div class="hud" id="hud"></div>
+      </section>
+
+      <aside class="panel">
+        <h2>Controls</h2>
+        <ul>
+          <li><kbd>W</kbd>/<kbd>S</kbd>: throttle</li>
+          <li><kbd>↑</kbd>/<kbd>↓</kbd>: pitch</li>
+          <li><kbd>←</kbd>/<kbd>→</kbd>: roll</li>
+          <li><kbd>A</kbd>/<kbd>D</kbd>: yaw</li>
+          <li><kbd>Space</kbd>: reset</li>
+        </ul>
+        <p class="tip">Fly low over the terrain rings and stay in control.</p>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
