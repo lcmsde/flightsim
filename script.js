@@ -2,6 +2,42 @@ const canvas = document.getElementById('simCanvas');
 const ctx = canvas.getContext('2d');
 const hudEl = document.getElementById('hud');
 
+function terrainHeight(x, z) {
+  return 18 + Math.sin(x * 0.03) * 9 + Math.cos(z * 0.02) * 8 + Math.sin((x + z) * 0.01) * 5;
+}
+
+function createInitialState() {
+  const x = 0;
+  const z = 0;
+  return {
+    x,
+    y: terrainHeight(x, z) + 70,
+    z,
+    speed: 42,
+    throttle: 0.55,
+    pitch: 0,
+    roll: 0,
+    heading: 0,
+    time: 0,
+  };
+}
+
+const state = createInitialState();
+
+const keys = new Set();
+
+const rings = Array.from({ length: 24 }, (_, i) => {
+  const x = Math.sin(i * 1.15) * 120;
+  const z = 240 + i * 220;
+  const r = 18 + (i % 3) * 4;
+  const clearance = 26 + (i % 4) * 10;
+  return {
+    x,
+    z,
+    r,
+    y: terrainHeight(x, z) + clearance + r,
+  };
+});
 const state = {
   x: 0,
   y: 80,
@@ -35,17 +71,7 @@ window.addEventListener('keyup', (event) => {
 });
 
 function reset() {
-  Object.assign(state, {
-    x: 0,
-    y: 80,
-    z: 0,
-    speed: 42,
-    throttle: 0.55,
-    pitch: 0,
-    roll: 0,
-    heading: 0,
-    time: 0,
-  });
+  Object.assign(state, createInitialState());
 }
 
 function clamp(value, min, max) {
